@@ -19,5 +19,8 @@
   "homepage": "https://github.com/Potseluiko/simple-crud-api#readme",
   "devDependencies": {
     "prettier": "^2.4.1"
+  },
+  "dependencies": {
+    "uuid": "^8.3.2"
   }
 }
