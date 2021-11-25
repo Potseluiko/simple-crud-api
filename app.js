@@ -26,8 +26,6 @@ const requestListener = function (request, response) {
 
   request.on("end", () => {
     try {
-      console.log("...", body)
-
       request.body = body
 
       currentRoute.callback(request, response)

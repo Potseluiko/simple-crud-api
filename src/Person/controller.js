@@ -1,32 +1,25 @@
 const personService = require("../database/persons")
 const router = require("../router/index")
 
-router.get("/persons", {}, (req, res) => {
-  console.log(">> All persons", req, res)
+router.get("/persons", {}, (request, response) => {
+  const result = personService.getPersons()
 
-  return ">> 1 GET ALL PERSONS"
-
-  // const personDTO = req.body
-
-  // save into DB
-  // const person = personService.addPerson(personDTO)
-
-  // return res.json()
+  response.writeHead(201, { "Content-Type": "application/json" })
+  response.end(JSON.stringify(result))
 })
 
-router.get("/person/${personId}", {}, (req, res) => {
-  console.log(">> Person", req, res)
-
-  return ">> 2 GET PERSON"
+router.get("/person/${personId}", {}, (request, response) => {
+  // const result = personService.addPerson(JSON.parse(request.body))
+  //
+  // response.writeHead(201, { "Content-Type": "application/json" })
+  // response.end(JSON.stringify(result))
 })
 
 router.post("/person", {}, (request, response) => {
-  // const personDTO = req.body
-
-  console.log(">> Post person", request.body)
+  const result = personService.addPerson(JSON.parse(request.body))
 
   response.writeHead(201, { "Content-Type": "application/json" })
-  response.end(JSON.stringify(request.body))
+  response.end(JSON.stringify(result))
 })
 
 router.put("/person/${personId}", {}, (req, res) => {
