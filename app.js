@@ -1,28 +1,45 @@
 const http = require("http")
+const { getRoute } = require("./src/router")
 
 // ...
 require("./src/Person/controller")
-const { getRoute } = require("./src/router")
 
-const requestListener = function (req, res) {
-  // const urlParts = req.url.split("/")
-  console.log("START! req = ", req.method, req.url)
-
-  const currentRoute = getRoute(req.method, req.url)
+const requestListener = function (request, response) {
+  const currentRoute = getRoute(request.method, request.url)
 
   if (!currentRoute) {
-    res.writeHead(404)
-    res.end(
+    response.writeHead(404)
+    response.end(
       JSON.stringify({
         message: "Page not found"
       })
     )
-  } else {
-    console.log("EMD! req = ", currentRoute.callback(req, res))
 
-    res.writeHead(200)
-    res.end(currentRoute.callback(req, res))
+    return
   }
+
+  let body = ""
+
+  request.on("data", (chunk) => {
+    body += chunk
+  })
+
+  request.on("end", () => {
+    try {
+      console.log("...", body)
+
+      request.body = body
+
+      currentRoute.callback(request, response)
+    } catch (err) {
+      response.writeHead(500)
+      response.end(
+        JSON.stringify({
+          message: "Something went wrong!"
+        })
+      )
+    }
+  })
 }
 
 const server = http.createServer(requestListener)
