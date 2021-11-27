@@ -9,11 +9,7 @@ const requestListener = function (request, response) {
 
   if (!currentRoute) {
     response.writeHead(404)
-    response.end(
-      JSON.stringify({
-        message: "Page not found"
-      })
-    )
+    response.end(JSON.stringify({ message: "Route not found" }))
 
     return
   }
@@ -32,11 +28,7 @@ const requestListener = function (request, response) {
       currentRoute.callback(request, response)
     } catch (err) {
       response.writeHead(500)
-      response.end(
-        JSON.stringify({
-          message: "Something went wrong!"
-        })
-      )
+      response.end(JSON.stringify({ message: "Something went wrong!" }))
     }
   })
 }

@@ -1,11 +1,10 @@
 const routes = {}
 
-const _registerRoute = (method, path, validators, callback) => {
+const _registerRoute = (method, path, callback) => {
   routes[path] = routes[path] || {}
 
   routes[path][method] = {
     path,
-    validators,
     callback
   }
 }
@@ -62,13 +61,13 @@ const getRoute = (path, method) => {
   return null
 }
 
-const get = (path, validators, callback) => _registerRoute("get", path, validators, callback)
+const get = (path, callback) => _registerRoute("get", path, callback)
 
-const post = (path, validators, callback) => _registerRoute("post", path, validators, callback)
+const post = (path, callback) => _registerRoute("post", path, callback)
 
-const put = (path, validators, callback) => _registerRoute("put", path, validators, callback)
+const put = (path, callback) => _registerRoute("put", path, callback)
 
-const deleteFn = (path, validators, callback) => _registerRoute("delete", path, validators, callback)
+const deleteFn = (path, callback) => _registerRoute("delete", path, callback)
 
 module.exports = {
   getRoute,

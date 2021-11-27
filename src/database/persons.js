@@ -43,6 +43,8 @@ const removePerson = (id) => {
   }
 
   delete persons[id]
+
+  return { id }
 }
 
 module.exports = {
