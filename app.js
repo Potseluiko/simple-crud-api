@@ -1,4 +1,5 @@
 const http = require("http")
+require("dotenv").config()
 const router = require("./src/router")
 
 require("./src/Person")
@@ -33,4 +34,4 @@ const requestListener = function (request, response) {
 }
 
 const server = http.createServer(requestListener)
-server.listen(9900)
+server.listen(process.env.PORT || 8080)
