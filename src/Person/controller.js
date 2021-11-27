@@ -1,6 +1,6 @@
 const uuid = require("uuid")
-const personService = require("../database/persons")
 const router = require("../router/index")
+const personModel = require("./model")
 const personValidator = require("./validator")
 
 const _validateId = (value) => {
@@ -9,7 +9,7 @@ const _validateId = (value) => {
 
 // Get persons
 router.get("/person", (request, response) => {
-  const result = personService.getPersons()
+  const result = personModel.getAll()
 
   response.writeHead(200, { "Content-Type": "application/json" })
   response.end(JSON.stringify(result))
@@ -26,7 +26,7 @@ router.get("/person/${personId}", (request, response) => {
     return
   }
 
-  const result = personService.getPerson(personId)
+  const result = personModel.getById(personId)
 
   if (!result) {
     response.writeHead(404)
@@ -51,7 +51,7 @@ router.post("/person", (request, response) => {
     return
   }
 
-  const result = personService.addPerson(data)
+  const result = personModel.create(data)
 
   response.writeHead(200, { "Content-Type": "application/json" })
   response.end(JSON.stringify(result))
@@ -78,7 +78,7 @@ router.put("/person/${personId}", (request, response) => {
     return
   }
 
-  const result = personService.updatePerson(personId, data)
+  const result = personModel.updateById(personId, data)
 
   if (!result) {
     response.writeHead(404)
@@ -102,7 +102,7 @@ router.delete("/person/${personId}", (request, response) => {
     return
   }
 
-  const result = personService.removePerson(personId)
+  const result = personModel.deleteById(personId)
 
   if (!result) {
     response.writeHead(404)

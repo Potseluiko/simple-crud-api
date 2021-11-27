@@ -1,11 +1,10 @@
 const http = require("http")
-const { getRoute } = require("./src/router")
+const router = require("./src/router")
 
-// ...
-require("./src/Person/controller")
+require("./src/Person")
 
 const requestListener = function (request, response) {
-  const currentRoute = getRoute(request.url, request.method)
+  const currentRoute = router.getRoute(request.url, request.method)
 
   if (!currentRoute) {
     response.writeHead(404)
