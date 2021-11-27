@@ -13,7 +13,7 @@ const getPerson = (id) => {
 }
 
 const addPerson = (data) => {
-  const id = uuid.v1()
+  const id = uuid.v4()
 
   persons[id] = {
     ...(data || {}),

@@ -5,7 +5,7 @@ const { getRoute } = require("./src/router")
 require("./src/Person/controller")
 
 const requestListener = function (request, response) {
-  const currentRoute = getRoute(request.method, request.url)
+  const currentRoute = getRoute(request.url, request.method)
 
   if (!currentRoute) {
     response.writeHead(404)
@@ -27,6 +27,7 @@ const requestListener = function (request, response) {
   request.on("end", () => {
     try {
       request.body = body
+      request.params = currentRoute.params
 
       currentRoute.callback(request, response)
     } catch (err) {
