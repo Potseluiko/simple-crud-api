@@ -17,10 +17,24 @@ npm install
 ```
 
 3. Optional. You can set PORT in `.env` file. Default port is 8080.
-4. Start server
 
 ```bash
-npm run start
+# In .env file:
+PORT=8080
+```
+
+4. Start server
+
+In development mode:
+
+```bash
+npm run start:dev
+```
+
+In production mode:
+
+```bash
+npm run start:prod
 ```
 
 ## Routes
