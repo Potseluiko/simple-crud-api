@@ -37,6 +37,14 @@ In production mode:
 npm run start:prod
 ```
 
+5. Run tests
+
+```bash
+npm run test
+```
+
+Notes. Tests run on port **9090**.
+
 ## Routes
 
 - **GET** `/person` return all persons

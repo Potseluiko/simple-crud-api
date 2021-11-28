@@ -2,6 +2,16 @@ const uuid = require("uuid")
 
 const records = {}
 
+// Now Tests and App have one shared database!
+// In a real project this should be improved.
+const drop = () => {
+  for (const id in records) {
+    if (records.hasOwnProperty(id)) {
+      delete records[id]
+    }
+  }
+}
+
 const getAll = () => Object.values(records)
 
 const getById = (id) => {
@@ -48,6 +58,7 @@ const deleteById = (id) => {
 }
 
 module.exports = {
+  drop,
   getAll,
   getById,
   create,
