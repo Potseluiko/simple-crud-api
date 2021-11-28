@@ -1,10 +1,7 @@
-const http = require("http")
-require("dotenv").config()
 const router = require("./src/router")
-
 require("./src/Person")
 
-const requestListener = function (request, response) {
+const app = (request, response) => {
   const currentRoute = router.getRoute(request.url, request.method)
 
   if (!currentRoute) {
@@ -33,5 +30,4 @@ const requestListener = function (request, response) {
   })
 }
 
-const server = http.createServer(requestListener)
-server.listen(process.env.PORT || 8080)
+module.exports = app
