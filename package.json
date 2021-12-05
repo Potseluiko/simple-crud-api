@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start:dev": "nodemon ./server.js",
-    "start:prod": "webpack --mode=production && node ./dist/server.js",
+    "start:prod": "webpack --mode=production && node ./dist/app.js",
     "test": "jest",
     "prettier": "prettier --check \"**/*.{js,scss,md,html,json}\""
   },
